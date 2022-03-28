@@ -10,8 +10,8 @@ class KafkaClient:
     def __init__(self, kafka_brokers=None):
         print("creating message sender with params: " + str(locals()))
         if kafka_brokers is None:
-            kafka_brokers = ['10.110.50.96:9092', '10.110.50.104:9092', '10.110.50.119:9092']  # sit
-            # kafka_brokers = ['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']  # prod
+            # kafka_brokers = ['10.110.50.96:9092', '10.110.50.104:9092', '10.110.50.119:9092']  # sit
+            kafka_brokers = ['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']  # prod
         self.producer = KafkaProducer(bootstrap_servers=kafka_brokers)
 
     def __handle_success(self, *arguments, **kwargs):

@@ -10,8 +10,8 @@ class KafkaLocustUser(User):
         if not KafkaLocustUser.client:
             KafkaLocustUser.client = KafkaClient(KAFKA_BROKERS)
 
-KAFKA_BROKERS = ['10.110.50.96:9092', '10.110.50.104:9092', '10.110.50.119:9092']  # sit
-# KAFKA_BROKERS = ['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']  # prod
+# KAFKA_BROKERS = ['10.110.50.96:9092', '10.110.50.104:9092', '10.110.50.119:9092']  # sit
+KAFKA_BROKERS = ['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']  # prod
 
 class KafkaBehavior(TaskSet):
     @task(100)
