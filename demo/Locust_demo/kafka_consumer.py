@@ -6,7 +6,7 @@ from kafka.structs import TopicPartition
 # 这种方式只会获取新产生的数据
 
 # consumer = KafkaConsumer('test-topic')
-consumer = KafkaConsumer(bootstrap_servers=['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']) # kafka集群地址
+consumer = KafkaConsumer(bootstrap_servers=['xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx']) # kafka集群地址
 consumer.subscribe(topics=['test-topic', 'test-car-in', 'test-car-out'])  # 订阅要消费的主题
 print(consumer.topics())
 print(consumer.position(TopicPartition(topic=u'test-car-in', partition=0)))  # 获取当前主题的最新偏移量

@@ -10,16 +10,16 @@ class KafkaLocustUser(User):
         if not KafkaLocustUser.client:
             KafkaLocustUser.client = KafkaClient(KAFKA_BROKERS)
 
-# KAFKA_BROKERS = ['10.110.50.96:9092', '10.110.50.104:9092', '10.110.50.119:9092']  # sit
-KAFKA_BROKERS = ['10.103.20.101:9092', '10.103.20.102:9092', '10.103.20.103:9092']  # prod
+# KAFKA_BROKERS = ['xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx']  # sit
+KAFKA_BROKERS = ['xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx', 'xxx.xxx.xxx.xxx:xxxx']  # prod
 
 class KafkaBehavior(TaskSet):
-    @task(100)
+    # @task(100)
     def task1(self):
         self.client.send("test-topic",
                          message="{'phone_number': '13718415257','plate_number': '藏Q6QD177'}")
 
-    @task(500)
+   # @task(500)
     def task2(self):
         self.client.send("test-car-in", message="{'entranceTime': '1000','parkName': 'parkName','exitRoad': '0','onServerTime':'1',"
                                                 "'entranceParkBoxId': 'box_id','exitCarPlateColor': '0','exitCarPlateColor': '0',"
