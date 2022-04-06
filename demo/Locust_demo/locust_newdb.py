@@ -1,12 +1,47 @@
-# locust压测Tidb
+# locust压测Tidb2.0
+from __future__ import absolute_import
+from __future__ import print_function
+
 import random
 import time
 
-import pymysql
-from locust import task, TaskSet, User, between
+from locust import User, between, TaskSet, task, events
+from sqlalchemy import create_engine
 
 
-class TidbTaskSet(TaskSet):
+def create_conn(conn_string):
+    return create_engine("mysql+pymysql://" + conn_string).connect()
+
+
+def execute_query(conn_string, query):
+    _conn = create_conn(conn_string)
+    rs = _conn.execute(query)
+    return rs
+
+
+class MySqlClient:
+    def __getattr__(self, name):
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            try:
+                res = execute_query(*args, **kwargs)
+                events.request_success.fire(
+                    request_type="Tidb",
+                    name=name,
+                    response_time=int((time.time() - start_time) * 1000),
+                    response_length=res.rowcount)
+            except Exception as e:
+                events.request_failure.fire(
+                    request_type="Tidb",
+                    name=name,
+                    response_time=int((time.time() - start_time) * 1000),
+                    exception=e)
+
+        return wrapper
+
+
+class CustomTaskSet(TaskSet):
+    conn_string = "parking:5E1nbFPkcp5dsqnQ@rw.tidb.prod.etcp.net:5000/parking"
     sql_plateNumber = ['冀R62W63', '渝BLJ765', '渝A852A6', '陕J00339', '粤A37980D', '苏E0931Y',
                        '蒙DW013L', '川A7SK73', '渝BNW650', '沪EH1395', '鲁F388TS', '川AD808P',
                        '京N6A256', '京JR4601', '川A0UA97', '京A69318', '陕A8LQ56', '鄂A10M09',
@@ -825,282 +860,162 @@ class TidbTaskSet(TaskSet):
                  15975, 4228, 22210, 8467, 17167, 18268, 22509, 10414, 10439, 19389, 6461, 1846, 22042, 13827, 17872,
                  16575, 8902, 9887, 15555, 17267, 21149, 16947, 9773, 16566, 14424, 17152, 16942, 14666, 12683, 4500]
 
-    def on_start(self):
-
-        db = pymysql.connect(
-            # host='tidb.uat.etcp.net', port=5000, user='parking_dev', password='fTg1DIUKb81#tP3#', db='parking'  # qa
-            host='rw.tidb.prod.etcp.net', port=5000, user='parking', password='5E1nbFPkcp5dsqnQ', db='parking'  # prod
-        )
-        self.cursor = db.cursor()
-
-    def on_stop(self):
-        self.cursor.close()
-        print("------ Test over ------")  # 执行完测试任务后运行一次
-
     @task(50)
-    def execute_sql1(self):
+    def execute_query1(self):
         """普通索引查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee FROM parking_record WHERE " \
-                  "plate_number = '%s';" % str(random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            self.user.events.request_success.fire(res)
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query1(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee FROM parking_record WHERE " \
+            "plate_number = '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
-    def execute_sql2(self):
+    def execute_query2(self):
         """普通索引查询"""
-        try:
-            sql = "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(
-                random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query2(
+            self.conn_string,
+            "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
-    def execute_sql3(self):
+    def execute_query3(self):
         """普通索引查询降序100条"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time FROM parking_record " \
-                  "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(
-                random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query3(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time FROM parking_record " \
+            "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
-    def execute_sql4(self):
+    def execute_query4(self):
         """普通索引多条件查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time, is_finish FROM " \
-                  "parking_record WHERE entrance_time = '2021-01-01' AND is_finish = 1 AND plate_number = '%s';" \
-                  % str(random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query4(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time, is_finish FROM " \
+            "parking_record WHERE entrance_time = '2021-01-01' AND is_finish = 1 AND plate_number = '%s';" \
+            % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
-    def execute_sql5(self):
+    def execute_query5(self):
         """普通索引多条件查询"""
-        try:
-            sql = "SELECT is_finish, SUM(receivable_fee) AS receivable_fee FROM parking_record WHERE synid = '%s'" \
-                  " AND `status` = 1;" % str(random.choice(TidbTaskSet.sql_synid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query5(
+            self.conn_string,
+            "SELECT is_finish, SUM(receivable_fee) AS receivable_fee FROM parking_record WHERE synid = '%s'" \
+            " AND `status` = 1;" % str(random.choice(CustomTaskSet.sql_synid)))
 
     @task(50)
-    def execute_sql6(self):
+    def execute_query6(self):
         """唯一索引查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
-                  "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s';" \
-                  % str(random.choice(TidbTaskSet.sql_synid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query6(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
+            "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s';" \
+            % str(random.choice(CustomTaskSet.sql_synid)))
 
     @task(1)
-    def execute_sql7(self):
+    def execute_query7(self):
         """唯一索引多条件查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
-                  "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s' AND is_finish = 0 AND " \
-                  "entrance_time > '2020-01-01';" % str(random.choice(TidbTaskSet.sql_synid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query7(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
+            "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s' AND is_finish = 0 AND " \
+            "entrance_time > '2020-01-01';" % str(random.choice(CustomTaskSet.sql_synid)))
 
     @task(1)
-    def execute_sql8(self):
+    def execute_query8(self):
         """唯一索引查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
-                  "update_time, is_finish, `status` FROM parking_record WHERE plate_number = '%s' AND synid = '%s';" \
-                  % (str(random.choice(TidbTaskSet.sql_plateNumber)), str(random.choice(TidbTaskSet.sql_synid)))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query8(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
+            "update_time, is_finish, `status` FROM parking_record WHERE plate_number = '%s' AND synid = '%s';" \
+            % (str(random.choice(CustomTaskSet.sql_plateNumber)), str(random.choice(CustomTaskSet.sql_synid))))
 
     @task(1)
-    def execute_sql9(self):
+    def execute_query9(self):
         """普通索引查询"""
-        try:
-            sql = "SELECT SUM(receivable_fee) AS total_receivable_fee, SUM(actual_fee) AS total_actual_fee, " \
-                  "SUM(online_fee) AS total_online_fee FROM parking_record WHERE plate_number = '%s' AND `status` = 1;" \
-                  % str(random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query9(
+            self.conn_string,
+            "SELECT SUM(receivable_fee) AS total_receivable_fee, SUM(actual_fee) AS total_actual_fee, " \
+            "SUM(online_fee) AS total_online_fee FROM parking_record WHERE plate_number = '%s' AND `status` = 1;" \
+            % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
-    def execute_sql10(self):
+    def execute_query10(self):
         """普通索引查询"""
-        try:
-            sql = "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
-                  "update_time, is_finish, `status` FROM parking_record WHERE plate_number = '%s' AND " \
-                  "entrance_car_plate_color = 1 AND entrance_time > '2019-01-01';" \
-                  % str(random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query10(
+            self.conn_string,
+            "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, actual_fee, online_fee, " \
+            "update_time, is_finish, `status` FROM parking_record WHERE plate_number = '%s' AND " \
+            "entrance_car_plate_color = 1 AND entrance_time > '2019-01-01';" \
+            % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
-    def execute_sql11(self):
+    def execute_query11(self):
         """唯一索引联表查询"""
-        try:
-            sql = "SELECT parkingid, platenumber, exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, " \
-                  "actualfee, onlinefee, pam2 FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` = p.`synid` " \
-                  "WHERE updatetime > '2021-01-01' AND receivablefee = 0.00 AND actualfee = 0.00 AND c.`synid` = '%s';" \
-                  % str(random.choice(TidbTaskSet.sql_synid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query11(
+            self.conn_string,
+            "SELECT parkingid, platenumber, exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, " \
+            "actualfee, onlinefee, pam2 FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` = p.`synid` " \
+            "WHERE updatetime > '2021-01-01' AND receivablefee = 0.00 AND actualfee = 0.00 AND c.`synid` = '%s';" \
+            % str(random.choice(CustomTaskSet.sql_synid)))
 
     @task(10)
-    def execute_sql12(self):
+    def execute_query12(self):
         """普通索引内联查询"""
-        try:
-            sql = "SELECT row_number() over (ORDER BY plate_number DESC) row_num, parkingid, platenumber, " \
-                  "exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, actualfee, onlinefee, pam2 " \
-                  "FROM caroutpayment c INNER JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE " \
-                  "entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 AND c.`platenumber` " \
-                  "= '%s';" % str(random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query12(
+            self.conn_string,
+            "SELECT row_number() over (ORDER BY plate_number DESC) row_num, parkingid, platenumber, " \
+            "exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, actualfee, onlinefee, pam2 " \
+            "FROM caroutpayment c INNER JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE " \
+            "entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 AND c.`platenumber` " \
+            "= '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
-    def execute_sql13(self):
+    def execute_query13(self):
         """唯一索引联表查询"""
-        try:
-            sql = "SELECT parkingid, platenumber, entrancetime, exittime, updatetime, receivablefee, actualfee, " \
-                  "onlinefee, couponfee, centerfee, cardfee, buscardfee, pam2, entranceroadname, exitroadname, realname," \
-                  " cartypename, exitparkingboxname FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` " \
-                  "= p.synid WHERE entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 " \
-                  "AND c.`synid` = '%s';" % str(random.choice(TidbTaskSet.sql_synid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query13(
+            self.conn_string,
+            "SELECT parkingid, platenumber, entrancetime, exittime, updatetime, receivablefee, actualfee, " \
+            "onlinefee, couponfee, centerfee, cardfee, buscardfee, pam2, entranceroadname, exitroadname, realname," \
+            " cartypename, exitparkingboxname FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` " \
+            "= p.synid WHERE entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 " \
+            "AND c.`synid` = '%s';" % str(random.choice(CustomTaskSet.sql_synid)))
 
     @task(1)
-    def execute_sql14(self):
+    def execute_query14(self):
         """分页普通索引联表查询"""
-        try:
-            sql = "SELECT row_number() over (ORDER BY plate_number DESC) row_num, platenumber FROM caroutpayment c " \
-                  "LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE entrancetime > '2019-01-01' " \
-                  "AND receivablefee != 0.00 AND actualfee = 0.01 AND c.platenumber = '%s';" % str(
-                random.choice(TidbTaskSet.sql_plateNumber))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query14(
+            self.conn_string,
+            "SELECT row_number() over (ORDER BY plate_number DESC) row_num, platenumber FROM caroutpayment c " \
+            "LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE entrancetime > '2019-01-01' " \
+            "AND receivablefee != 0.00 AND actualfee = 0.01 AND c.platenumber = '%s';" % str(
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
-    def execute_sql15(self):
+    def execute_query15(self):
         """查询parking_id普通索引联表查询"""
-        try:
-            sql = "SELECT c.`platenumber` FROM caroutpayment c LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` " \
-                  "WHERE c.`parkingid` = %s AND p.`area_id` AND p.`state` = 0 AND p.`status` < 3 AND p.entrance_time = '2022-08-04' GROUP BY c.`platenumber`;" \
-                  % (random.choice(TidbTaskSet.sql_parkingid))
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            # print(res)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query15(
+            self.conn_string,
+            "SELECT c.`platenumber` FROM caroutpayment c LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` " \
+            "WHERE c.`parkingid` = %s AND p.`area_id` AND p.`state` = 0 AND p.`status` < 3 AND p.entrance_time = '2022-08-04' GROUP BY c.`platenumber`;" \
+            % (random.choice(CustomTaskSet.sql_parkingid)))
 
     @task(1)
-    def execute_sql16(self):
+    def execute_query16(self):
         """select 查询in parking_id / plate_number order by entrance_time"""
-        try:
-            sql = "SELECT parking_id, plate_number FROM parking_record ORDER BY entrance_time LIMIT 0, 10;"
-            s_time = time.time()
-            self.cursor.execute(sql)
-            res = self.cursor.fetchall()
-            m_time = time.time()
-            print(res, s_time - m_time)
-            # self.cursor.close()
-        except Exception:
-            print("Something went wrong!")
-        else:
-            print("Pass")
+        self.client.execute_query16(
+            self.conn_string,
+            "SELECT parking_id, plate_number FROM parking_record ORDER BY entrance_time LIMIT 0, 10;")
+
+    def on_stop(self):
+        print("------ Test over ------")
 
 
-class Tidb_Run_Set(User):
-    tasks = [TidbTaskSet]
-    wait_time = between(1, 3)
-    # host = 'tidb.uat.etcp.net'  # QA
-    host = 'rw.tidb.prod.etcp.net'  # prod
+class MySqlLocust(User):
+    min_wait = 0
+    max_wait = 0
+    tasks = [CustomTaskSet]
+    wait_time = between(min_wait, max_wait)
+
+    def __init__(self, env):
+        super().__init__(env)
+        self.client = MySqlClient()
