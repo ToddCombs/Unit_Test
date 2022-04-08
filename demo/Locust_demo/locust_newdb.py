@@ -41,7 +41,7 @@ class MySqlClient:
 
 
 class CustomTaskSet(TaskSet):
-    conn_string = "parking:5E1nbFPkcp5dsqnQ@rw.tidb.prod.etcp.net:5000/parking"
+    conn_string = "parking_dev:fTg1DIUKb81#tP3#@tidb.uat.etcp.net:5000/parking"  # qa
     sql_plateNumber = ['冀R62W63', '渝BLJ765', '渝A852A6', '陕J00339', '粤A37980D', '苏E0931Y',
                        '蒙DW013L', '川A7SK73', '渝BNW650', '沪EH1395', '鲁F388TS', '川AD808P',
                        '京N6A256', '京JR4601', '川A0UA97', '京A69318', '陕A8LQ56', '鄂A10M09',
@@ -873,8 +873,7 @@ class CustomTaskSet(TaskSet):
         """普通索引查询"""
         self.client.execute_query2(
             self.conn_string,
-            "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(
-                random.choice(CustomTaskSet.sql_plateNumber)))
+            "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
     def execute_query3(self):
@@ -882,8 +881,7 @@ class CustomTaskSet(TaskSet):
         self.client.execute_query3(
             self.conn_string,
             "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time FROM parking_record " \
-            "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(
-                random.choice(CustomTaskSet.sql_plateNumber)))
+            "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
     def execute_query4(self):
@@ -954,7 +952,7 @@ class CustomTaskSet(TaskSet):
         self.client.execute_query11(
             self.conn_string,
             "SELECT parkingid, platenumber, exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, " \
-            "actualfee, onlinefee, pam2 FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` = p.`synid` " \
+            "actualfee, onlinefee, pam2 FROM carout_payment c LEFT JOIN parking_record p ON c.`synid` = p.`synid` " \
             "WHERE updatetime > '2021-01-01' AND receivablefee = 0.00 AND actualfee = 0.00 AND c.`synid` = '%s';" \
             % str(random.choice(CustomTaskSet.sql_synid)))
 
@@ -965,7 +963,7 @@ class CustomTaskSet(TaskSet):
             self.conn_string,
             "SELECT row_number() over (ORDER BY plate_number DESC) row_num, parkingid, platenumber, " \
             "exitparkingboxid, entrancetime, exittime, updatetime, receivablefee, actualfee, onlinefee, pam2 " \
-            "FROM caroutpayment c INNER JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE " \
+            "FROM carout_payment c INNER JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE " \
             "entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 AND c.`platenumber` " \
             "= '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
@@ -976,7 +974,7 @@ class CustomTaskSet(TaskSet):
             self.conn_string,
             "SELECT parkingid, platenumber, entrancetime, exittime, updatetime, receivablefee, actualfee, " \
             "onlinefee, couponfee, centerfee, cardfee, buscardfee, pam2, entranceroadname, exitroadname, realname," \
-            " cartypename, exitparkingboxname FROM caroutpayment c LEFT JOIN parking_record p ON c.`synid` " \
+            " cartypename, exitparkingboxname FROM carout_payment c LEFT JOIN parking_record p ON c.`synid` " \
             "= p.synid WHERE entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 " \
             "AND c.`synid` = '%s';" % str(random.choice(CustomTaskSet.sql_synid)))
 
@@ -985,17 +983,17 @@ class CustomTaskSet(TaskSet):
         """分页普通索引联表查询"""
         self.client.execute_query14(
             self.conn_string,
-            "SELECT row_number() over (ORDER BY plate_number DESC) row_num, platenumber FROM caroutpayment c " \
+            "SELECT row_number() over (ORDER BY plate_number DESC) row_num, platenumber FROM carout_payment c " \
             "LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE entrancetime > '2019-01-01' " \
             "AND receivablefee != 0.00 AND actualfee = 0.01 AND c.platenumber = '%s';" % str(
-                random.choice(CustomTaskSet.sql_plateNumber)))
+            random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
     def execute_query15(self):
         """查询parking_id普通索引联表查询"""
         self.client.execute_query15(
             self.conn_string,
-            "SELECT c.`platenumber` FROM caroutpayment c LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` " \
+            "SELECT c.`platenumber` FROM carout_payment c LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` " \
             "WHERE c.`parkingid` = %s AND p.`area_id` AND p.`state` = 0 AND p.`status` < 3 AND p.entrance_time = '2022-08-04' GROUP BY c.`platenumber`;" \
             % (random.choice(CustomTaskSet.sql_parkingid)))
 
