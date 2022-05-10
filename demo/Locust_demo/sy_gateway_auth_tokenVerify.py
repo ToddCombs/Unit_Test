@@ -47,7 +47,8 @@ class auth_tokenVerify(TaskSet):
     def test_auth_tokenVerify(self):
         '''鉴权接口'''
         header = {
-            'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImV0Y3AtcCIsImZ1bGxOYW1lIjoi55Sz5a6HIiwiZXhwIjoxNjM4MTczODMxLCJ1dWlkIjoiZDcxYWY1ZjYtNWM3MS00YjE4LTk3NDItZmU2MTJlOWJiY2ZkIiwidXNlcklkIjoiNDI1MSIsImlhdCI6MTYzODE3MDIzMX0.y3N-kgtczjAwFDm4J23x020v0BEQnmmOVeVaJCrAzeQ'
+            # 'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImV0Y3AtcCIsImZ1bGxOYW1lIjoi55Sz5a6HIiwiZXhwIjoxNjM4MTczODMxLCJ1dWlkIjoiZDcxYWY1ZjYtNWM3MS00YjE4LTk3NDItZmU2MTJlOWJiY2ZkIiwidXNlcklkIjoiNDI1MSIsImlhdCI6MTYzODE3MDIzMX0.y3N-kgtczjAwFDm4J23x020v0BEQnmmOVeVaJCrAzeQ'
+            'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImV0Y3AtcCIsImZ1bGxOYW1lIjoi5bKz5L2z55CqIiwiZXhwIjoxNjUyMTU3MTIzLCJ1dWlkIjoiZDNjZTMyNDItZTk3ZS00NTUzLTk2ZGEtNDIyMmNiNzE0NzM2IiwidXNlcklkIjoiMzUzOSIsImlhdCI6MTY1MjE1MzUyM30.vkDpzz4fmjAEQKwlVLc4okRUdK6fU78pXTNvnROWXV8'
         }
         response = self.client.post(
             "auth/auth/1/tokenVerify", headers=header, name='网关鉴权tokenVerify接口')
