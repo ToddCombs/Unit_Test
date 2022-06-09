@@ -1883,7 +1883,8 @@ class pushBilling(TaskSet):
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
     @task(10)
     def push_bill_q_in2(self):
@@ -1892,25 +1893,28 @@ class pushBilling(TaskSet):
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
-    @task(8)
+    @task(5)
     def push_bill_m_in1(self):
         res = self.client.get("/push_bill?user_id=" + str(646531) + "&plate_number=" + quote(str('京A5UE78')) + "&p_t=m",
                               name="月1")
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
-    @task(8)
+    @task(5)
     def push_bill_m_in2(self):
         res = self.client.get("/push_bill?user_id=" + str(646843) + "&plate_number=" + quote(str('京N40AB0')) + "&p_t=m",
                               name="月2")
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
     @task(3)
     def push_bill_w_in1(self):
@@ -1919,7 +1923,8 @@ class pushBilling(TaskSet):
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
     @task(3)
     def push_bill_w_in2(self):
@@ -1928,30 +1933,41 @@ class pushBilling(TaskSet):
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
-    @task(5)
+    @task(10)
     def push_bill_q(self):
-        res = self.client.get("/push_bill?user_id=" + str(random.choice(pushBilling.user_id)) + "&plate_number=" +
-                              quote(random.choice(pushBilling.plate_number)) + "&p_t=q", name="季（混）")
+        q_index = len(pushBilling.user_id)  # 取列表长度
+        index = random.randint(0, q_index - 1)  # 返回指定列表内的整数
+        dis_ratio = random.randint(0, 10) > 8  # 返回列表数大于8成
+        res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&plate_number=" +
+                              quote(pushBilling.plate_number[index if not dis_ratio else index + 1]) + "&p_t=q",
+                              name="季（混）")  # 拼接url，userid取整数和车牌比较如果条件为真则执行+1
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
     @task(5)
     def push_bill_m(self):
-        res = self.client.get("/push_bill?user_id=" + str(random.choice(pushBilling.user_id)) + "&plate_number=" +
-                              quote(random.choice(pushBilling.plate_number)) + "&p_t=m", name="月（混）")
+        m_index = len(pushBilling.user_id)
+        index = random.randint(0, m_index - 1)
+        dis_ratio = random.randint(0, 10) > 8
+        res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&plate_number=" +
+                              quote(pushBilling.plate_number[index if not dis_ratio else index + 1]) + "&p_t=m",
+                              name="月（混）")
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
     @task(3)
     def push_bill_w(self):
-        m_index = len(pushBilling.user_id)
-        index = random.randint(0, m_index - 1)
+        w_index = len(pushBilling.user_id)
+        index = random.randint(0, w_index - 1)
         dis_ratio = random.randint(0, 10) > 8
         res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&plate_number=" +
                               quote(pushBilling.plate_number[index if not dis_ratio else index + 1]) + "&p_t=w",
@@ -1959,7 +1975,8 @@ class pushBilling(TaskSet):
         if res.status_code != 200:
             print("出错了，错误信息：", res.text)
         else:
-            print(res.text)
+            # print(res.text)
+            pass
 
 
 class pushUser(FastHttpUser):
