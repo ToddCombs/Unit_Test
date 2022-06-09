@@ -1978,7 +1978,7 @@ class pushBilling(TaskSet):
             # print(res.text)
             pass
 
-# 启动文件
+# 启动文件增加了一点东西
 class pushUser(FastHttpUser):
     tasks = [pushBilling]
     min_wait = 1000
