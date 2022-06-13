@@ -1,14 +1,13 @@
 # 大数据推送账单查费接口压测
 
 import random
-from urllib.parse import quote
 
+from icecream import ic
 from locust import task, TaskSet
 from locust.contrib.fasthttp import FastHttpUser
 
 
 class pushBilling(TaskSet):
-
     user_id = [143746007, 143745195, 143744839, 143744693, 143744675, 143743929, 143743477, 143743151, 143742967,
                143742921, 143742351, 143741969, 143741507, 143741369, 143741009, 143740777, 143740625, 143739263,
                143739141, 143739037, 143738873, 143738099, 143737793, 143737717, 143737525, 143737105, 143737049,
@@ -2130,10 +2129,10 @@ class pushBilling(TaskSet):
     # plate_number = []
 
     def on_start(self):
-        print("开始压测推送账单接口周月季。。。")
+        ic("开始压测推送账单接口周月季。。。")
 
     def on_stop(self):
-        print("------ Test over ------")
+        ic("------ Test over ------")
 
     @task(10)
     def push_bill_q_in1(self):
@@ -2141,9 +2140,9 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143729393) + "&car_id=" + str(95529087) + "&p_t=q",
             name="季1")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(10)
@@ -2152,9 +2151,10 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143728445) + "&car_id=" + str(95528203) + "&p_t=q",
             name="季2")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
+
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(5)
@@ -2163,9 +2163,9 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143480027) + "&car_id=" + str(95316475) + "&p_t=m",
             name="月1")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(5)
@@ -2174,9 +2174,9 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143702623) + "&car_id=" + str(95505297) + "&p_t=m",
             name="月2")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(3)
@@ -2185,9 +2185,9 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143702623) + "&car_id=" + str(95505297) + "&p_t=w",
             name="周1")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(3)
@@ -2196,9 +2196,9 @@ class pushBilling(TaskSet):
             "/push_bill?user_id=" + str(143628265) + "&car_id=" + str(95444243) + "&p_t=w",
             name="周2")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(10)
@@ -2210,9 +2210,9 @@ class pushBilling(TaskSet):
                               str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=q",
                               name="季（混）")  # 拼接url，userid取整数和car_id比较如果条件为真则执行+1
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(5)
@@ -2224,9 +2224,9 @@ class pushBilling(TaskSet):
                               str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=m",
                               name="月（混）")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
     @task(3)
@@ -2238,9 +2238,9 @@ class pushBilling(TaskSet):
                               str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=w",
                               name="周（混）")
         if res.status_code != 200:
-            print("出错了，错误信息：", res.text)
+            ic("出错了，错误信息：", res.text)
         else:
-            # print(res.text)
+            # ic(res.text)
             pass
 
 
