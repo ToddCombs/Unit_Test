@@ -7,7 +7,7 @@ from locust import task, TaskSet
 from locust.contrib.fasthttp import FastHttpUser
 
 
-class pushBilling(TaskSet):
+class PushBilling(TaskSet):
     user_id = [143746007, 143745195, 143744839, 143744693, 143744675, 143743929, 143743477, 143743151, 143742967,
                143742921, 143742351, 143741969, 143741507, 143741369, 143741009, 143740777, 143740625, 143739263,
                143739141, 143739037, 143738873, 143738099, 143737793, 143737717, 143737525, 143737105, 143737049,
@@ -2135,7 +2135,7 @@ class pushBilling(TaskSet):
         ic("------ Test over ------")
 
     @task(10)
-    def push_bill_q_in1(self):
+    def Push_bill_q_in1(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143729393) + "&car_id=" + str(95529087) + "&p_t=q",
             name="季1")
@@ -2146,7 +2146,7 @@ class pushBilling(TaskSet):
             pass
 
     @task(10)
-    def push_bill_q_in2(self):
+    def Push_bill_q_in2(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143728445) + "&car_id=" + str(95528203) + "&p_t=q",
             name="季2")
@@ -2158,7 +2158,7 @@ class pushBilling(TaskSet):
             pass
 
     @task(5)
-    def push_bill_m_in1(self):
+    def Push_bill_m_in1(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143480027) + "&car_id=" + str(95316475) + "&p_t=m",
             name="月1")
@@ -2169,7 +2169,7 @@ class pushBilling(TaskSet):
             pass
 
     @task(5)
-    def push_bill_m_in2(self):
+    def Push_bill_m_in2(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143702623) + "&car_id=" + str(95505297) + "&p_t=m",
             name="月2")
@@ -2180,7 +2180,7 @@ class pushBilling(TaskSet):
             pass
 
     @task(3)
-    def push_bill_w_in1(self):
+    def Push_bill_w_in1(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143702623) + "&car_id=" + str(95505297) + "&p_t=w",
             name="周1")
@@ -2191,7 +2191,7 @@ class pushBilling(TaskSet):
             pass
 
     @task(3)
-    def push_bill_w_in2(self):
+    def Push_bill_w_in2(self):
         res = self.client.get(
             "/push_bill?user_id=" + str(143628265) + "&car_id=" + str(95444243) + "&p_t=w",
             name="周2")
@@ -2202,12 +2202,12 @@ class pushBilling(TaskSet):
             pass
 
     @task(10)
-    def push_bill_q(self):
-        q_index = len(pushBilling.user_id)  # 取列表长度
+    def Push_bill_q(self):
+        q_index = len(PushBilling.user_id)  # 取列表长度
         index = random.randint(0, q_index - 1)  # 返回指定列表内的整数
         dis_ratio = random.randint(0, 10) > 8  # 返回列表数大于8成
-        res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&car_id=" +
-                              str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=q",
+        res = self.client.get("/push_bill?user_id=" + str(PushBilling.user_id[index]) + "&car_id=" +
+                              str(PushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=q",
                               name="季（混）")  # 拼接url，userid取整数和car_id比较如果条件为真则执行+1
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
@@ -2216,12 +2216,12 @@ class pushBilling(TaskSet):
             pass
 
     @task(5)
-    def push_bill_m(self):
-        m_index = len(pushBilling.user_id)
+    def Push_bill_m(self):
+        m_index = len(PushBilling.user_id)
         index = random.randint(0, m_index - 1)
         dis_ratio = random.randint(0, 10) > 8
-        res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&car_id=" +
-                              str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=m",
+        res = self.client.get("/push_bill?user_id=" + str(PushBilling.user_id[index]) + "&car_id=" +
+                              str(PushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=m",
                               name="月（混）")
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
@@ -2230,12 +2230,12 @@ class pushBilling(TaskSet):
             pass
 
     @task(3)
-    def push_bill_w(self):
-        w_index = len(pushBilling.user_id)
+    def Push_bill_w(self):
+        w_index = len(PushBilling.user_id)
         index = random.randint(0, w_index - 1)
         dis_ratio = random.randint(0, 10) > 8
-        res = self.client.get("/push_bill?user_id=" + str(pushBilling.user_id[index]) + "&car_id=" +
-                              str(pushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=w",
+        res = self.client.get("/push_bill?user_id=" + str(PushBilling.user_id[index]) + "&car_id=" +
+                              str(PushBilling.car_id[index if not dis_ratio else index + 1]) + "&p_t=w",
                               name="周（混）")
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
@@ -2245,8 +2245,8 @@ class pushBilling(TaskSet):
 
 
 # 启动文件增加了一点东西，需要prod环境
-class pushUser(FastHttpUser):
-    tasks = [pushBilling]
+class PushUser(FastHttpUser):
+    tasks = [PushBilling]
     min_wait = 1000
     max_wait = 3000
     host = "http://10.103.22.88:8090/hp"  # qa
