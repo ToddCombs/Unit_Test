@@ -14,8 +14,8 @@ class Web_Status(TaskSet):
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
         else:
-            ic(res.text)
-            # pass
+            # ic(res.text)
+            pass
 
 
 class Web_User(FastHttpUser):
