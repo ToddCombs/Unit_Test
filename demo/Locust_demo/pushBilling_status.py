@@ -8,9 +8,18 @@ from locust.contrib.fasthttp import FastHttpUser
 class Web_Status(TaskSet):
     """纯Web服务，无业务"""
 
-    @task(10)
+    # @task(10)
     def Push_Privilege_Status(self):
         res = self.client.get("/privilege/status", name="纯web服务无业务")
+        if res.status_code != 200:
+            ic("出错了，错误信息：", res.text)
+        else:
+            # ic(res.text)
+            pass
+
+    @task(10)
+    def Push_Web(self):
+        res = self.client.get("http://10.110.60.33:8011/", name="无业务")
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
         else:
@@ -22,4 +31,4 @@ class Web_User(FastHttpUser):
     tasks = [Web_Status]
     min_wait = 1000
     max_wait = 3000
-    host = "http://10.103.22.88:8090"  # qa
+    # host = "http://10.103.22.88:8090"  # qa
