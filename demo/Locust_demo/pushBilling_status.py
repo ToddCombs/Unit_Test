@@ -10,12 +10,12 @@ class Web_Status(TaskSet):
 
     @task(10)
     def Push_Privilege_Status(self):
-        res = self.client.get("/privilege/status")
+        res = self.client.get("/privilege/status", name="纯web服务无业务")
         if res.status_code != 200:
             ic("出错了，错误信息：", res.text)
         else:
-            # ic(res.text)
-            pass
+            ic(res.text)
+            # pass
 
 
 class Web_User(FastHttpUser):
