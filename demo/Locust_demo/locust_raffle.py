@@ -50,7 +50,7 @@ class Raffle(TaskSet):
         :return:执行抽奖
         """
         data = {
-            "activityId": "100012",
+            "activityId": "160005",
             "userTag": "user_1",
             "userType": 2
         }
@@ -67,7 +67,7 @@ class Raffle(TaskSet):
         :return:执行抽奖
         """
         data = {
-            "activityId": "100012",
+            "activityId": "160005",
             "userTag": "user_2",
             "userType": 2
         }
@@ -84,7 +84,7 @@ class Raffle(TaskSet):
         :return:执行抽奖
         """
         data = {
-            "activityId": "100012",
+            "activityId": "160005",
             "userTag": "user_3",
             "userType": 2
         }
@@ -101,7 +101,7 @@ class Raffle(TaskSet):
         :return:执行抽奖
         """
         data = {
-            "activityId": "100012",
+            "activityId": "160005",
             "userTag": "user_4",
             "userType": 2
         }
