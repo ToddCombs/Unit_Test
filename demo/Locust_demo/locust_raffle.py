@@ -37,13 +37,13 @@ class Raffle(TaskSet):
             "drawStartTime": str(random.choice(Raffle.drawStartTime)),
             "drawEndTime": str(random.choice(Raffle.drawEndTime)),
             "userTag": str(random.choice(Raffle.user_tag)[0]),
-            "userType": ic(random.choice([1, 2, 3]))
+            "userType": str(random.choice([1, 2, 3]))
         }
         res = self.client.post("marketing/open/raffle/v1/mock/draw/result", json=data, name="抽奖结果查询")
         if res.status_code != 200:
             ic(res.text)
         else:
-            pass
+            ic(res.text)
 
     # @task(1)
     def raffle_submit_user1(self):
