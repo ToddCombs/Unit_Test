@@ -130,430 +130,430 @@ class Raffle(TaskSet):
         else:
             pass
 
-        @task(1)
-        def raffle_submit_user6(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_6",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_6抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    @task(1)
+    def raffle_submit_user6(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_6",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_6抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        @task(1)
-        def raffle_submit_user7(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_7",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_7抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    @task(1)
+    def raffle_submit_user7(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_7",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_7抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        @task(1)
-        def raffle_submit_user8(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_8",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_8抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    @task(1)
+    def raffle_submit_user8(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_8",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_8抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        @task(1)
-        def raffle_submit_user9(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_9",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_9抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    @task(1)
+    def raffle_submit_user9(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_9",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_9抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        @task(1)
-        def raffle_submit_user10(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_10",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_10抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    @task(1)
+    def raffle_submit_user10(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_10",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_10抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user11(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_11",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_11抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user11(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_11",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_11抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user12(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_12",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_12抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user12(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_12",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_12抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user13(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_13",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_13抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user13(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_13",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_13抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user14(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_14",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_14抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user14(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_14",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_14抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user15(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_15",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_15抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user15(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_15",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_15抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user16(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_16",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_16抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user16(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_16",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_16抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user17(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_17",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_17抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user17(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_17",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_17抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user18(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_18",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_18抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user18(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_18",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_18抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user19(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_19",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_19抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user19(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_19",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_19抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user20(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_20",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_20抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user20(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_20",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_20抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user21(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_21",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_21抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user21(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_21",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_21抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user22(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_22",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_22抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user22(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_22",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_22抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user23(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_23",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_23抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user23(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_23",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_23抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user24(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_24",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_24抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user24(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_24",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_24抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user25(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_25",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_25抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user25(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_25",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_25抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user26(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_26",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_26抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user26(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_26",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_26抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user27(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_27",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_27抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user27(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_27",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_27抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user28(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_28",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_28抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user28(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_28",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_28抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user29(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_29",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_29抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user29(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_29",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_29抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
-        #@task(1)
-        def raffle_submit_user30(self):
-            """
-            :param:
-            :return:执行抽奖
-            """
-            data = {
-                "activityId": "160005",
-                "userTag": "user_30",
-                "userType": 2
-            }
-            res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_30抽奖")
-            if res.status_code != 200:
-                ic(res.text)
-            else:
-                pass
+    #@task(1)
+    def raffle_submit_user30(self):
+        """
+        :param:
+        :return:执行抽奖
+        """
+        data = {
+            "activityId": "160005",
+            "userTag": "user_30",
+            "userType": 2
+        }
+        res = self.client.post("marketing/open/raffle/v1/mock/draw/perform", json=data, name="user_30抽奖")
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
 
 class Raffle_Run(FastHttpUser):
     tasks = [Raffle]
