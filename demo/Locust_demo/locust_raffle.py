@@ -20,12 +20,12 @@ class Raffle(TaskSet):
                    "2022-07-01 23:59:59", "2022-07-02 23:59:59", "2022-07-03 23:59:59", "2022-07-04 23:59:59"]
 
     def on_start(self):
-        ic("开始抽奖系统查询接口压测。。。")
+        ic("开始抽奖系统接口压测。。。")
 
     def on_stop(self):
         ic("------ Test over ------")
 
-    @task(1)
+    # @task(1)
     def raffle_search(self):
         """
         查询抽奖结果
@@ -43,9 +43,9 @@ class Raffle(TaskSet):
         if res.status_code != 200:
             ic(res.text)
         else:
-            ic(res.text)
+            pass
 
-    # @task(1)
+    @task(1)
     def raffle_submit_user1(self):
         """
         :param:
@@ -62,7 +62,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    # @task(1)
+    @task(1)
     def raffle_submit_user2(self):
         """
         :param:
@@ -79,7 +79,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    # @task(1)
+    @task(1)
     def raffle_submit_user3(self):
         """
         :param:
@@ -96,7 +96,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    # @task(1)
+    @task(1)
     def raffle_submit_user4(self):
         """
         :param:
