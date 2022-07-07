@@ -215,7 +215,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user11(self):
         """
         :param:
@@ -232,7 +232,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user12(self):
         """
         :param:
@@ -249,7 +249,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user13(self):
         """
         :param:
@@ -266,7 +266,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user14(self):
         """
         :param:
@@ -283,7 +283,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user15(self):
         """
         :param:
@@ -300,7 +300,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user16(self):
         """
         :param:
@@ -317,7 +317,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user17(self):
         """
         :param:
@@ -334,7 +334,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user18(self):
         """
         :param:
@@ -351,7 +351,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user19(self):
         """
         :param:
@@ -368,7 +368,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user20(self):
         """
         :param:
@@ -385,7 +385,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user21(self):
         """
         :param:
@@ -402,7 +402,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user22(self):
         """
         :param:
@@ -419,7 +419,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user23(self):
         """
         :param:
@@ -436,7 +436,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user24(self):
         """
         :param:
@@ -453,7 +453,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user25(self):
         """
         :param:
@@ -470,7 +470,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user26(self):
         """
         :param:
@@ -487,7 +487,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user27(self):
         """
         :param:
@@ -504,7 +504,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user28(self):
         """
         :param:
@@ -521,7 +521,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user29(self):
         """
         :param:
@@ -538,7 +538,7 @@ class Raffle(TaskSet):
         else:
             pass
 
-    #@task(1)
+    @task(1)
     def raffle_submit_user30(self):
         """
         :param:
