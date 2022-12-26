@@ -1,6 +1,7 @@
 # 2022出行报告小程序压测
 import random
-
+import numpy as np
+import pandas as pd
 from icecream import ic
 from locust import task, TaskSet
 from locust.contrib.fasthttp import FastHttpUser
@@ -11,7 +12,7 @@ class Reporter(TaskSet):
     :param:userId
     :return:res.text
     """
-    userId = [1001]
+    data = np.array(pd.read_csv())
 
     def on_start(self):
         ic("------ 开始压测 ------")
@@ -20,12 +21,9 @@ class Reporter(TaskSet):
         ic("------ Test over ------")
 
     @task(1)
-    def query_parking(self):
-        """2022年度账单接口1"""
-        data = {
-            "user_id": str(random.choice(Reporter.userId[0]))
-        }
-        res = self.client.post("hp/2022/1", json=data, name='年度账单接口1')
+    def query_parking_details(self):
+        """2022年度账单接口1详细信息"""
+        res = self.client.get("hp/2022/1/?user_id=" + str(random.choice(Reporter.data)[0]), name='年度账单接口1')
 
         if res.status_code != 200:
             ic(res.text)
@@ -35,10 +33,7 @@ class Reporter(TaskSet):
     @task(1)
     def query_parking(self):
         """2022年度账单接口2"""
-        data = {
-            "user_id": str(random.choice(Reporter.userId[0]))
-        }
-        res = self.client.post("hp/2022/2", json=data, name='年度账单接口2')
+        res = self.client.get("hp/2022/2/?user_id=" + str(random.choice(Reporter.data)[0]), name='年度账单接口2')
 
         if res.status_code != 200:
             ic(res.text)
