@@ -38,7 +38,7 @@ class Reporter(TaskSet):
         else:
             pass
 
-    @task(2)
+    # @task(2)
     def no_result(self):
         """查询无结果测试"""
         res = self.client.get("hp/2022/" + str(random.choice([1, 2])) + "/?user_id=no_result", name='无查询结果')
