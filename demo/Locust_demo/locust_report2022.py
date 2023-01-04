@@ -51,4 +51,5 @@ class Reporter_Run(FastHttpUser):
     tasks = [Reporter]
     min_wait = 1000
     max_wait = 3000
-    host = "https://api-c-sit.etcp.cn/parkingReport/"
+    # host = "http://10.110.60.33:8081/"  # 大数据接口
+    host = "https://api-c-sit.etcp.cn/parkingReport/"  # 网关接口
