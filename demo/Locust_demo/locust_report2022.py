@@ -20,7 +20,7 @@ class Reporter(TaskSet):
     def on_stop(self):
         ic("------ Test over ------")
 
-    @task(4)
+    # @task(4)
     def query_parking_details(self):
         """2022年度账单接口1详细信息"""
         res = self.client.get("hp/2022/1/?user_id=" + str(random.choice(Reporter.data)[0]), name='年度账单详情接口1')
@@ -51,4 +51,4 @@ class Reporter_Run(FastHttpUser):
     tasks = [Reporter]
     min_wait = 1000
     max_wait = 3000
-    host = "http://10.110.60.33:8081/"
+    host = "https://api-c-sit.etcp.cn/parkingReport/"
