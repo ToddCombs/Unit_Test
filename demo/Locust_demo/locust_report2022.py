@@ -32,7 +32,7 @@ class Reporter(TaskSet):
     @task(4)
     def query_parking(self):
         """2022年度账单接口2"""
-        res = self.client.get("hp/2022/2/?user_id=" + str(random.choice(Reporter.data)[0]), name='年度账单接口2')
+        res = self.client.get("hp/2022/2?user_id=" + str(random.choice(Reporter.data)[0]), name='年度账单接口2')
         if res.status_code != 200:
             ic(res.text)
         else:
