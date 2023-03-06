@@ -10,6 +10,11 @@
 # age = 2023 - int(birth_year)
 # print(age)
 
-weight_lbs = input('you weight: ')
-weight_kg = float(weight_lbs) * 0.45
-print('the weight is ' + str(weight_kg))
+# weight_lbs = input('you weight: ')
+# weight_kg = float(weight_lbs) * 0.45
+# print('the weight is ' + str(weight_kg))
+
+first = 'Todd'
+last = 'Combs'
+msg = f'[{first}] [{last}] is a python coder.'
+print(msg)
