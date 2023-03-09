@@ -10,6 +10,8 @@ ts.set_token('19daf5d0248695483d961699537e768560bf359f240a0d4c084b08c1')
 pro = ts.pro_api()
 
 # 获取股票数据
+# start_date--开始日期，为"%Y%m%d"格式
+# end_date--结束日期，为"%Y%m%d"格式
 df = pro.daily(ts_code='300491.SZ', start_date='20230101', end_date='20230308')
 
 # 计算移动平均线
