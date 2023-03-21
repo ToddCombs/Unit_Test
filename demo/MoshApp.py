@@ -73,17 +73,42 @@
 # if has_good_credit and not has_criminal_record:
 #     print("Eligible for loan")
 
-temperature = 30
-if temperature > 30:
-    print("It's a hot day")
-else:
-    print("It's not a hot day")
+# temperature = 30
+# if temperature > 30:
+#     print("It's a hot day")
+# else:
+#     print("It's not a hot day")
+#
+# name = "Todd Combs"
+# if len(name) < 3:
+#     print("Name must be at least 3 characters.")
+# elif len(name) > 50:
+#     print("Name must be a maximum of 50 characters.")
+# else:
+#     print("Name looks good!")
 
-name = "Todd Combs"
-if len(name) < 3:
-    print("Name must be at least 3 characters.")
-elif len(name) > 50:
-    print("Name must be a maximum of 50 characters.")
-else:
-    print("Name looks good!")
+# weight = int(input('Weight: '))
+# unit = input('(L)bs or (K)g: ')
+# if unit.upper() == "L":
+#     converted = weight * 0.45
+#     print(f"You are {converted} kilos")
+# else:
+#     converted = weight / 0.45
+#     print(f"You are {converted} pounds")
+# i = 1
+# while i <= 5:
+#     print('*' * i)
+#     i += 1
+# print("Done")
 
+secret_number = 9
+guess_count = 0
+guess_limit = 3
+while guess_count < guess_limit:
+    guess = int(input("Guess: "))
+    guess_count += 1
+    if guess == secret_number:
+        print("You won!")
+        break
+else:
+    print("Sorry, You failed!")
