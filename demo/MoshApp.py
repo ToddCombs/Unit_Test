@@ -101,14 +101,44 @@
 #     i += 1
 # print("Done")
 
-secret_number = 9
-guess_count = 0
-guess_limit = 3
-while guess_count < guess_limit:
-    guess = int(input("Guess: "))
-    guess_count += 1
-    if guess == secret_number:
-        print("You won!")
-        break
-else:
-    print("Sorry, You failed!")
+# secret_number = 9
+# guess_count = 0
+# guess_limit = 3
+# while guess_count < guess_limit:
+#     guess = int(input("Guess: "))
+#     guess_count += 1
+#     if guess == secret_number:
+#         print("You won!")
+#         break
+# else:
+#     print("Sorry, You failed!")
+
+# command = ""
+# started = False
+# while True:
+#     command = input("> ").lower()
+#     if command == "start":
+#         if started:  # 如果started是假则说明车辆已启动，打印车辆已启动
+#             print("Car is already started!")
+#         else:   # 否则started修改为真值（启动状态）并打印车辆启动
+#             started = True
+#             print("Car started...")
+#     elif command == "stop":
+#         if not started:
+#             print("Car is already stopped!")
+#         else:
+#             started = False
+#             print("Car stopped.")
+#     elif command == "help":
+#         print("""
+# start - to start the car
+# stop - to stop the car
+# quit - to quit
+#         """)
+#     elif command == "quit":
+#         break
+#     else:
+#         print("Sorry, I don't understand that.")
+
+for item in range(5, 10):
+    print(item)
