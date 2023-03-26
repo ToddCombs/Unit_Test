@@ -140,5 +140,45 @@
 #     else:
 #         print("Sorry, I don't understand that.")
 
-for item in range(5, 10):
-    print(item)
+# for item in range(5, 10, 2):    # 第三个函数是步长
+#     print(item)
+#
+# prices = [10, 20, 30]
+# total = 0
+# for price in prices:
+#     total += price  # 列表内元素相加
+# print(f"Total: {total}")
+#
+# for x in range(4):
+#     for y in range(3):
+#         print(f'({x}, {y})')
+
+# numbers = [5, 2, 5, 2, 2]
+# for number in numbers:
+#     # print(number * '*')
+#     output = ''
+#     for count in range(number):
+#         output += 'x'
+#     print(output)
+
+# names = ['John', 'Bob', 'Mosh', 'Sarah', 'Mary']
+# names[0] = 'Joh'
+# print(names)
+
+# 冒泡排序
+# numbers = [3, 6, 10, 2, 8, 4]
+# max = numbers[0]
+# for number in numbers:
+#     if number > max:
+#         max = number
+# print(max)
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix[1][2])
+for row in matrix:
+    for item in row:
+        print(item)
