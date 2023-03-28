@@ -173,12 +173,29 @@
 #         max = number
 # print(max)
 
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-print(matrix[1][2])
-for row in matrix:
-    for item in row:
-        print(item)
+# matrix = [
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9]
+# ]
+# print(matrix[1][2])
+# for row in matrix:
+#     for item in row:
+#         print(item)
+
+numbers = [4, 2, 1, 3, 5, 8, 5]
+numbers.insert(0, 9)    # 插入元素到列表0下标位置
+# numbers.remove(8)  # 删除指定值
+# numbers.clear()  # 清除列表内全部数据
+# numbers.pop()  # 直接调用清除列表最后一个元素
+print(numbers)
+print(numbers.index(8))  # 返回列表元素的索引
+print(10 in numbers)    # print检查10是否在列表内
+print(numbers.count(5))  # count统计列表里元素个数
+numbers.sort()  # 将列表内元素升序排序
+print(numbers)
+numbers.reverse()  # 将列表内元素降序排序
+print(numbers)
+numbers2 = numbers.copy()   # 复制列表
+numbers.append(11)
+print(numbers, numbers2)
