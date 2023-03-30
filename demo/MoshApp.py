@@ -223,14 +223,29 @@
 # print(customer.get("birthdate"))
 # print(customer.get("birthdate", "Jan 9 1986"))  # 如果字典里没有该字段，可以临时指定一个
 
-phone = input("Phone: ")
-digits_mapping = {
-    "1": "One",
-    "2": "Two",
-    "3": "Three",
-    "4": "Four"
-}
-output = ""
-for ch in phone:
-    output += digits_mapping.get(ch, "!") + " "  # 如果输入的内容字典内没有键值，则用！替代
-print(output)
+# phone = input("Phone: ")
+# digits_mapping = {
+#     "1": "One",
+#     "2": "Two",
+#     "3": "Three",
+#     "4": "Four"
+# }
+# output = ""
+# for ch in phone:
+#     output += digits_mapping.get(ch, "!") + " "  # 如果输入的内容字典内没有键值，则用！替代
+# print(output)
+
+# message = input("> ")
+# words = message.split()  # 以空格分割
+# emojis = {
+#     ":)": "😊",   # win键+">"键可以调出系统自带的emoji表情！
+#     ":(": "😒"
+# }
+# output = ""
+# for word in words:
+#     output += emojis.get(word, word) + " "
+# print(output)
+
+def hello_user():
+    print("Hi, there!\nWelcome aboard")
+hello_user()
