@@ -235,17 +235,60 @@
 #     output += digits_mapping.get(ch, "!") + " "  # 如果输入的内容字典内没有键值，则用！替代
 # print(output)
 
+# def emoji_converter(message):
+#     """
+#     emoji转换器
+#     :param message:
+#     :return:
+#     """
+#     words = message.split(" ")  # 以空格分割
+#     emojis = {
+#         ":)": "😊",   # win键+">"键可以调出系统自带的emoji表情！
+#         ":(": "😒"
+#     }
+#     output = ""
+#     for word in words:
+#         output += emojis.get(word, word) + " "
+#     return output
 # message = input("> ")
-# words = message.split()  # 以空格分割
-# emojis = {
-#     ":)": "😊",   # win键+">"键可以调出系统自带的emoji表情！
-#     ":(": "😒"
-# }
-# output = ""
-# for word in words:
-#     output += emojis.get(word, word) + " "
-# print(output)
+# print(emoji_converter(message))
 
-def hello_user():
-    print("Hi, there!\nWelcome aboard")
-hello_user()
+# def hello_user(first_name, last_name):
+#     print(f"Hi {first_name} {last_name}!\nWelcome aboard")
+# hello_user(first_name="Todd", last_name="Combs")
+
+# def square(number):
+#     """
+#     练习
+#     :param number:
+#     :return:如果不写return，则默认返回none
+#     """
+#     return number * number  # 如果不写return，则默认返回none
+# res = square(3)
+# print(res)
+
+# 错误处理
+# try:
+#     age = int(input('Age: '))
+#     income = 20000
+#     risk = income / age
+#     print(age)
+# except ZeroDivisionError:
+#     print('Age cannot be 0.')
+# except ValueError:
+#     print('Invalid value')
+
+class Point:
+    def move(self):
+        print("move")
+
+    def draw(self):
+        print("draw")
+
+point1 = Point()    # 类的实例化
+point1.x = 10   # 设置实例属性
+point1.y = 20
+print(point1.x)  # 封装过程
+point1.draw()
+point2 = Point()
+print(point2.x)  # 每个实例是独立的，point2没有封装x属性，因此会报错
