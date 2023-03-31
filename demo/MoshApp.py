@@ -278,17 +278,40 @@
 # except ValueError:
 #     print('Invalid value')
 
-class Point:
-    def move(self):
-        print("move")
+# class Point:
+#     def __init__(self, x, y):
+#         """
+#         构造函数
+#         :param x:
+#         :param y:
+#         """
+#         self.x = x
+#         self.y = y
+#
+#     def move(self):
+#         print("move")
+#
+#     def draw(self):
+#         print("draw")
+#
+# # point1 = Point()    # 类的实例化
+# # point1.x = 10   # 设置实例属性
+# # point1.y = 20
+# # print(point1.x)  # 封装过程
+# # point1.draw()
+# # point2 = Point()
+# # print(point2.x)  # 每个实例是独立的，point2没有封装x属性，因此会报错
+# point = Point(10, 20)
+# point.x = 11
+# print(point.x)
 
-    def draw(self):
-        print("draw")
+class Persons:
 
-point1 = Point()    # 类的实例化
-point1.x = 10   # 设置实例属性
-point1.y = 20
-print(point1.x)  # 封装过程
-point1.draw()
-point2 = Point()
-print(point2.x)  # 每个实例是独立的，point2没有封装x属性，因此会报错
+    def __init__(self, name):
+        self.name = name    # 构造函数继承
+
+    def talk(self):
+        print(f"Hi! I am {self.name}")
+
+todd = Persons("Todd Combs")    # 传参给类的构造函数
+todd.talk()
