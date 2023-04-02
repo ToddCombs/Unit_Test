@@ -12,7 +12,7 @@
 # 启动master时，需要使用--master参数；同样的，如果要使用8089以外的端口，还需要使用-P, --port参数。
 # 如果slave与master不在同一台机器上，还需要通过--master-host参数再指定master的IP地址
 # $ locust -H http://debugtalk.com
-#       -f demo.py --slave --master-host=<locust_machine_ip>
+#       -f exercises.py --slave --master-host=<locust_machine_ip>
 from lxml import etree
 from locust import HttpUser, TaskSet, task
 

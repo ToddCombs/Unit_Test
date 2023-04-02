@@ -10,7 +10,7 @@ from locust.contrib.fasthttp import FastHttpUser
 
 class Parking_Record(TaskSet):
     # 获取csv文件里的所有列,存储到一个数组中
-    data = np.array(pd.read_csv("demo/Locust_demo/10000_utf8.csv"))
+    data = np.array(pd.read_csv("exercises/Locust_demo/10000_utf8.csv"))
 
     def on_start(self):
         '''测试套件开始时执行'''

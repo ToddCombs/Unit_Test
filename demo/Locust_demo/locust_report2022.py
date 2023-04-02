@@ -12,7 +12,7 @@ class Reporter(TaskSet):
     :param:userId
     :return:res.text
     """
-    data = np.array(pd.read_csv("demo/data/userid10000.csv"))
+    data = np.array(pd.read_csv("exercises/data/userid10000.csv"))
 
     def on_start(self):
         ic("------ 开始压测 ------")

@@ -4,7 +4,7 @@ from functools import partial
 from locust import User
 from locust.user import task
 
-from demo.Locust_demo.telnet_dubbo import InvokeDubboApi
+from demo import InvokeDubboApi
 
 functions = {
     'query_order_polling': ('cn.etcp.tradecenter.facade.QueryOrderFacade', 'queryOrderPolling'),

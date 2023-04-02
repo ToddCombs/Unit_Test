@@ -1,6 +1,6 @@
 # 简单的unittest实例
 import unittest
-from demo.common.my_unit import MyUnit
+from demo import MyUnit
 
 class TestUnittest(MyUnit):
 

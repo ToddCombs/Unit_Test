@@ -2,7 +2,7 @@ import random
 import time
 
 import pymysql
-# from demo.Locust_demo.locust_tidb import TidbTaskSet
+# from exercises.Locust_demo.locust_tidb import TidbTaskSet
 
 db = pymysql.connect(
     host='XXXX', port=5000, user='XXXX', password='XXXX', db='XXXX')

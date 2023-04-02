@@ -1,5 +1,4 @@
 # author:ToddCombs  测试套件
-from demo.unit_test_openfile import *
 import os
 from demo import HTMLTestRunner
 # 创建一个测试套件 == list
@@ -20,7 +19,7 @@ suite = unittest.TestSuite()
 # discover = unittest.defaultTestLoader.discover(start_dir=test_dir, pattern='unit_test_*.py')
 
 # 引入形式4，读取模块文件名来引入测试用例
-# suite.addTest(unittest.TestLoader().loadTestsFromName('demo.unit_test_openfile'))  # 这里写入模块文件名而非类名
+# suite.addTest(unittest.TestLoader().loadTestsFromName('exercises.unit_test_openfile'))  # 这里写入模块文件名而非类名
 
 # 引入形式5，读取类名来引入测试用例
 # suite.addTest(unittest.TestLoader().loadTestsFromTestCase(forTestTest))

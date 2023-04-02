@@ -1,6 +1,6 @@
 from locust import task, User, TaskSet
 
-from demo.Locust_demo.kafka_client import KafkaClient
+from demo import KafkaClient
 
 class KafkaLocustUser(User):
     abstract = True

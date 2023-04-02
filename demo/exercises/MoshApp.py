@@ -165,14 +165,6 @@
 # names[0] = 'Joh'
 # print(names)
 
-# 冒泡排序
-# numbers = [3, 6, 10, 2, 8, 4]
-# max = numbers[0]
-# for number in numbers:
-#     if number > max:
-#         max = number
-# print(max)
-
 # matrix = [
 #     [1, 2, 3],
 #     [4, 5, 6],
@@ -305,13 +297,41 @@
 # point.x = 11
 # print(point.x)
 
-class Persons:
+# class Persons:
+#
+#     def __init__(self, name):
+#         self.name = name    # 构造函数继承
+#
+#     def talk(self):
+#         print(f"Hi! I am {self.name}")
+#
+# todd = Persons("Todd Combs")    # 传参给类的构造函数
+# todd.talk()
 
-    def __init__(self, name):
-        self.name = name    # 构造函数继承
+# class Mammal:
+#     def walk(self):
+#         print("walk")
+#
+# class Dog(Mammal):
+#     """继承"""
+#     def bark(self):
+#         print("bark")
+#
+# class Cat(Mammal):
+#     def be_annoying(self):
+#         print("annoying")
+#
+# dog1 = Dog()
+# dog1.walk()
+# dog1.bark()
+# cat1 = Cat()
+# cat1.walk()
+# cat1.be_annoying()
 
-    def talk(self):
-        print(f"Hi! I am {self.name}")
+# from demo.exercises import converters
+# print(converters.kg_to_lbs(90))
 
-todd = Persons("Todd Combs")    # 传参给类的构造函数
-todd.talk()
+from demo.exercises import utils
+numbers = [3, 6, 10, 2, 8, 4, 12, 1, 8, 11, 0, 3, 13, 88]
+maximum = utils.find_max(numbers)
+print("The max number is: ", maximum)

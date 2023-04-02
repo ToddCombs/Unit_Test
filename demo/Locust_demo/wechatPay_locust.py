@@ -1,13 +1,9 @@
 # 微信支付相关接口压测
 import sys
 import time
-from functools import partial
 
-from icecream import ic
-from locust import task, events, TaskSet, User
+from locust import task, events, TaskSet
 from locust.contrib.fasthttp import FastHttpUser
-
-from demo.Locust_demo.telnet_dubbo import InvokeDubboApi
 
 
 class UserBehavior(TaskSet):

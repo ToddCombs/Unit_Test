@@ -3,7 +3,7 @@ import time
 
 from selenium import webdriver
 
-from demo.common.my_unit import MyUnit
+from demo import MyUnit
 
 class TestInstance(MyUnit):
 
