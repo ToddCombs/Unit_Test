@@ -331,7 +331,43 @@
 # from demo.exercises import converters
 # print(converters.kg_to_lbs(90))
 
-from demo.exercises import utils
-numbers = [3, 6, 10, 2, 8, 4, 12, 1, 8, 11, 0, 3, 13, 88]
-maximum = utils.find_max(numbers)
-print("The max number is: ", maximum)
+# from demo.exercises import utils
+# numbers = [3, 6, 10, 2, 8, 4, 12, 1, 8, 11, 0, 3, 13, 88]
+# maximum = utils.find_max(numbers)
+# print("The max number is: ", maximum)
+
+# from demo.exercises.ecommerce.shipping import calc_shipping
+# calc_shipping()
+
+# import random
+
+
+# for i in range(3):
+#     print(random.randint(10, 20))
+
+# members = ['Todd', 'Combs', 'Bob', 'Mosh']
+# leader = random.choice(members)
+# print(leader)
+
+# class Dice:
+#     def roll_number(self):
+#         first = random.randint(1, 6)
+#         second = random.randint(1, 6)
+#         return first, second
+#
+#
+# dice = Dice()
+# print(dice.roll_number())
+
+# 引用文件
+from pathlib import Path
+# Absolute path  绝对路径
+# Relative path  相对路径
+path = Path("ecommerce")
+# print(path.mkdir())     # mkdir函数在当前路径创建一个文件夹
+# print(path.rmdir())     # rmdir删除指定名字的文件夹
+print(path.exists())    # exists函数检查相对路径是否存在返回True或False
+# print(path.glob('*.py'))  # *.py获取当前目录中的所有python文件。*.*获取当前目录中的所有文件，不是目录
+for file in path.glob('*'):
+    print(file)
+
