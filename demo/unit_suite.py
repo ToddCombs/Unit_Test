@@ -1,6 +1,9 @@
 # author:ToddCombs  测试套件
 import os
+import unittest
+
 from demo import HTMLTestRunner
+
 # 创建一个测试套件 == list
 suite = unittest.TestSuite()
 
@@ -28,7 +31,7 @@ report_name = '测试报告名称'
 report_title = '测试报告标题'
 report_desc = '测试报告描述'
 report_path = './report/'
-report_file = report_path + 'report3.html'
+report_file = report_path + 'report4.html'
 if not os.path.exists(report_path):
     os.mkdir(report_path)
 else:
@@ -39,9 +42,8 @@ with open(report_file, 'wb') as report:
     # 套件通过TextTestRunner对象进行运行， ≈ unittest.main()
     # unittest.main()运行所有内容，而TextTestRunner仅运行选中的用例
     # 如果结合HTMLTestRunner使用，则需要调用HTMLTestRunner中的运行器
-    runner = HTMLTestRunner.HTMLTestRunner(stream=report, title=report_title,description=report_desc)
+    runner = HTMLTestRunner.HTMLTestRunner(stream=report, title=report_title, description=report_desc)
     runner.run(suite)
-
 
 # 引入形式3，运行形式3
 # runner.run(discover)

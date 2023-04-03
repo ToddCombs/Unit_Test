@@ -1,7 +1,8 @@
 # 这是test_unittest.py, test_pytest.py相关的执行main文件
-import os
 import unittest
+
 from HTMLTestRunner import HTMLTestRunner
+
 # if __name__ == '__main__':
 #     # 创建一个测试套件
 #     suite = unittest.TestSuite()

@@ -201,9 +201,9 @@
         
     <div class='page-header'>
         <h1>测试报告标题</h1>
-    <p class='attribute'><strong>开始时间:</strong> 2021-08-20 13:35:11</p>
+    <p class='attribute'><strong>开始时间:</strong> 2023-04-03 09:23:13</p>
 <p class='attribute'><strong>运行时长:</strong> 0:00:00</p>
-<p class='attribute'><strong>状态:</strong> 通过 7 失败 3</p>
+<p class='attribute'><strong>状态:</strong> 错误 1</p>
 
     </div>
     <div style="float: left;width:50%;"><p class='description'>测试报告描述</p></div>
@@ -234,190 +234,36 @@
             <td>查看</td>
         </tr>
         
-    <tr class='failClass'>
-        <td>unit_test_openfile.forTestTest</td>
-        <td>10</td>
-        <td>7</td>
-        <td>3</td>
+    <tr class='errorClass'>
+        <td>unittest.loader._FailedTest</td>
+        <td>1</td>
         <td>0</td>
-        <td><a href="javascript:showClassDetail('c1',10)">详情</a></td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c1',1)">详情</a></td>
     </tr>
 
 <tr id='ft1.1' class='none'>
-    <td class='failCase'><div class='testcase'>test_10</div></td>
+    <td class='errorCase'><div class='testcase'>unit_test_openfile</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
-        失败</a>
+        错误</a>
 
     <div id='div_ft1.1' class="popup_window">
-        <pre>ft1.1: 8
+        <pre>ft1.1: ImportError: Failed to import test module: unit_test_openfile
 Traceback (most recent call last):
-  File "C:\Users\Administrator\PycharmProjects\Unit_Test\demo\unit_test_openfile.py", line 88, in test_10
-    self.assertAlmostEqual(100, 101, places=7, msg='notEqual')
-AssertionError: 100 != 101 within 7 places (1 difference) : notEqual
-</pre>
-    </div>
-    <!--css div popup end-->
+  File "C:\Program Files\Anaconda\lib\unittest\loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File "C:\Program Files\JetBrains\PyCharm 2019.2.2\helpers\pydev\_pydev_bundle\pydev_import_hook.py", line 21, in do_import
+    module = self._system_import(name, *args, **kwargs)
+  File "C:\Users\admin\PycharmProjects\Unit_Test\demo\unit_test_openfile.py", line 5, in &lt;module&gt;
+    from ddt import ddt, data, unpack, file_data
+  File "C:\Program Files\JetBrains\PyCharm 2019.2.2\helpers\pydev\_pydev_bundle\pydev_import_hook.py", line 21, in do_import
+    module = self._system_import(name, *args, **kwargs)
+ModuleNotFoundError: No module named 'ddt'
 
-    </td>
-</tr>
-
-<tr id='ft1.2' class='none'>
-    <td class='failCase'><div class='testcase'>test_11</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.2')" >
-        失败</a>
-
-    <div id='div_ft1.2' class="popup_window">
-        <pre>ft1.2: 9
-Traceback (most recent call last):
-  File "C:\Users\Administrator\PycharmProjects\Unit_Test\demo\unit_test_openfile.py", line 93, in test_11
-    self.assertTrue(1 + 2 == 4)
-AssertionError: False is not true
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_12</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
-        通过</a>
-
-    <div id='div_pt1.3' class="popup_window">
-        <pre>pt1.3: 10
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.4' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_3</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.4')" >
-        通过</a>
-
-    <div id='div_pt1.4' class="popup_window">
-        <pre>pt1.4: 1
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.5' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_4</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.5')" >
-        通过</a>
-
-    <div id='div_pt1.5' class="popup_window">
-        <pre>pt1.5: 2
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.6' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_5</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.6')" >
-        通过</a>
-
-    <div id='div_pt1.6' class="popup_window">
-        <pre>pt1.6: 3
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='ft1.7' class='none'>
-    <td class='failCase'><div class='testcase'>test_6</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.7')" >
-        失败</a>
-
-    <div id='div_ft1.7' class="popup_window">
-        <pre>ft1.7: 4
-Traceback (most recent call last):
-  File "C:\Users\Administrator\PycharmProjects\Unit_Test\demo\unit_test_openfile.py", line 68, in test_6
-    self.assertEqual(4, 3, msg='notEqual')
-AssertionError: 4 != 3 : notEqual
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.8' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_7</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
-        通过</a>
-
-    <div id='div_pt1.8' class="popup_window">
-        <pre>pt1.8: 5
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.9' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_8</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >
-        通过</a>
-
-    <div id='div_pt1.9' class="popup_window">
-        <pre>pt1.9: 6
-</pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
-</tr>
-
-<tr id='pt1.10' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_9</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >
-        通过</a>
-
-    <div id='div_pt1.10' class="popup_window">
-        <pre>pt1.10: 7
 </pre>
     </div>
     <!--css div popup end-->
@@ -427,10 +273,10 @@ AssertionError: 4 != 3 : notEqual
 
         <tr id='total_row'>
             <td>总计</td>
-            <td>10</td>
-            <td>7</td>
-            <td>3</td>
+            <td>1</td>
             <td>0</td>
+            <td>0</td>
+            <td>1</td>
             <td>&nbsp;</td>
         </tr>
     </table>
@@ -464,9 +310,9 @@ AssertionError: 4 != 3 : notEqual
                     radius : '60%',
                     center: ['50%', '60%'],
                     data:[
-                        {value:7, name:'通过'},
-                        {value:3, name:'失败'},
-                        {value:0, name:'错误'}
+                        {value:0, name:'通过'},
+                        {value:0, name:'失败'},
+                        {value:1, name:'错误'}
                     ],
                     itemStyle: {
                         emphasis: {
