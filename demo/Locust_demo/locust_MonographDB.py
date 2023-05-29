@@ -5,7 +5,7 @@ from __future__ import print_function
 import random
 import time
 
-from locust import User, between, TaskSet, task, events, constant
+from locust import User, TaskSet, task, events, constant
 from sqlalchemy import create_engine, exc
 
 
@@ -883,7 +883,8 @@ class CustomTaskSet(TaskSet):
         """普通索引查询"""
         self.client.execute_query2(
             self.conn_string,
-            "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
+            "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
     def execute_query3(self):
@@ -891,7 +892,8 @@ class CustomTaskSet(TaskSet):
         self.client.execute_query3(
             self.conn_string,
             "SELECT id, plate_number, entrance_time, exit_time, receivable_fee, update_time FROM parking_record " \
-            "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(random.choice(CustomTaskSet.sql_plateNumber)))
+            "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(50)
     def execute_query4(self):
@@ -996,7 +998,7 @@ class CustomTaskSet(TaskSet):
             "SELECT row_number() over (ORDER BY plate_number DESC) row_num, platenumber FROM carout_payment c " \
             "LEFT JOIN parking_record p ON c.`platenumber` = p.`plate_number` WHERE entrancetime > '2019-01-01' " \
             "AND receivablefee != 0.00 AND actualfee = 0.01 AND c.platenumber = '%s';" % str(
-            random.choice(CustomTaskSet.sql_plateNumber)))
+                random.choice(CustomTaskSet.sql_plateNumber)))
 
     @task(1)
     def execute_query15(self):
@@ -1014,6 +1016,30 @@ class CustomTaskSet(TaskSet):
             self.conn_string,
             "SELECT parking_id, plate_number FROM parking_record ORDER BY entrance_time LIMIT 0, 10;")
 
+    @task(1)
+    def execute_insert1(self):
+        """carout_payment表单条插入"""
+        self.client.execute_insert1(
+            self.conn_string,
+            "INSERT INTO carout_payment(parkingid, platenumber, exitparkingboxid, entrancetime, exittime, ontime," \
+            " updatetime, recordsynid, synid, receivablefee, actualfee, onlinefee, couponfee, centerfee, cardfee," \
+            "buscardfee, adminid, state, upload,upload_insert,upload_update, integralsfee,losemoney,entranceroad," \
+            "entranceroadname,exitroad,exitroadname,realname,isfixed,remarks,cartypeid,cartypename,exitparkingboxname," \
+            "couponid,usetype,businessid,usecouponparkingboxid,cpmfee,overcharged) VALUES(1004042,'藏QVVVV1'," \
+            "10003994,NOW(),NOW(),NOW(),NOW(),UUID(),UUID(),0.00,0.00,0.00,0.00,0.00,0.00,0.00,6238,0,2,NOW(),NOW()," \
+            "0.00,0.00,7362,'入口1',7365,'出口1','搜索',77,'这是插入数据remarks',5251,'2cpd','岗亭1',0,0,0,0,0.00,0.00);")
+
+    @task(1)
+    def execute_insert2(self):
+        """parking_record表单条插入"""
+        self.client.execute_insert2(
+            self.conn_string,
+            "INSERT INTO parking_record(record_type, entrance_time,entrance_parking_box_id,exit_time,exit_parking_box_id," \
+            "receivable_fee,actual_fee,admin_id,ontime,update_time,parking_id,area_id,group_id,is_fixed,state,exit_road," \
+            "entrance_road,synid,plate_number,upload_insert,upload_update,remarks,online_fee,`status`) VALUES(77,NOW()," \
+            "10003994,NOW(),10003994,0.02,0.00,6238,NOW(),NOW(),1004042,3430,UUID(),77,4937,7365,7362,UUID(),'藏QVVVV1'," \
+            "NOW(),NOW(),'这是插入parking_record的数据',0.00,1);")
+
     def on_stop(self):
         print("------ Test over ------")
 
@@ -1023,6 +1049,7 @@ class MySqlLocust(User):
     max_wait = 0
     tasks = [CustomTaskSet]
     wait_time = constant(0.5)
+
     # wait_time = between(min_wait, max_wait)
 
     def __init__(self, env):
