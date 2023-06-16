@@ -51,7 +51,7 @@ class MySqlClient:
 
 
 class CustomTaskSet(TaskSet):
-    conn_string = "etcp6:etcp6@10.106.50.12:3500/parking"  # qa
+    conn_string = "mono:mono@10.106.50.14:3300/parking"  # qa
     sql_plateNumber = ['冀R62W63', '渝BLJ765', '渝A852A6', '陕J00339', '粤A37980D', '苏E0931Y',
                        '蒙DW013L', '川A7SK73', '渝BNW650', '沪EH1395', '鲁F388TS', '川AD808P',
                        '京N6A256', '京JR4601', '川A0UA97', '京A69318', '陕A8LQ56', '鄂A10M09',
@@ -870,7 +870,7 @@ class CustomTaskSet(TaskSet):
                  15975, 4228, 22210, 8467, 17167, 18268, 22509, 10414, 10439, 19389, 6461, 1846, 22042, 13827, 17872,
                  16575, 8902, 9887, 15555, 17267, 21149, 16947, 9773, 16566, 14424, 17152, 16942, 14666, 12683, 4500]
 
-    @task(50)
+    # @task(50)
     def execute_query1(self):
         """普通索引查询"""
         self.client.execute_query1(
@@ -878,7 +878,7 @@ class CustomTaskSet(TaskSet):
             "SELECT id, plate_number, entrance_time, exit_time, receivable_fee FROM parking_record WHERE " \
             "plate_number = '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(1)
+    # @task(1)
     def execute_query2(self):
         """普通索引查询"""
         self.client.execute_query2(
@@ -886,7 +886,7 @@ class CustomTaskSet(TaskSet):
             "SELECT COUNT(1) FROM parking_record WHERE plate_number = '%s';" % str(
                 random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(50)
+    # @task(50)
     def execute_query3(self):
         """普通索引查询降序100条"""
         self.client.execute_query3(
@@ -895,7 +895,7 @@ class CustomTaskSet(TaskSet):
             "WHERE plate_number = '%s' ORDER BY entrance_time DESC LIMIT 100;" % str(
                 random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(50)
+    # @task(50)
     def execute_query4(self):
         """普通索引多条件查询"""
         self.client.execute_query4(
@@ -904,7 +904,7 @@ class CustomTaskSet(TaskSet):
             "parking_record WHERE entrance_time = '2021-01-01' AND is_finish = 1 AND plate_number = '%s';" \
             % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(50)
+    # @task(50)
     def execute_query5(self):
         """普通索引多条件查询"""
         self.client.execute_query5(
@@ -912,7 +912,7 @@ class CustomTaskSet(TaskSet):
             "SELECT is_finish, SUM(receivable_fee) AS receivable_fee FROM parking_record WHERE synid = '%s'" \
             " AND `status` = 1;" % str(random.choice(CustomTaskSet.sql_synid)))
 
-    @task(50)
+    # @task(50)
     def execute_query6(self):
         """唯一索引查询"""
         self.client.execute_query6(
@@ -921,7 +921,7 @@ class CustomTaskSet(TaskSet):
             "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s';" \
             % str(random.choice(CustomTaskSet.sql_synid)))
 
-    @task(1)
+    # @task(1)
     def execute_query7(self):
         """唯一索引多条件查询"""
         self.client.execute_query7(
@@ -930,7 +930,7 @@ class CustomTaskSet(TaskSet):
             "update_time, is_finish, `status` FROM parking_record WHERE synid = '%s' AND is_finish = 0 AND " \
             "entrance_time > '2020-01-01';" % str(random.choice(CustomTaskSet.sql_synid)))
 
-    @task(1)
+    # @task(1)
     def execute_query8(self):
         """唯一索引查询"""
         self.client.execute_query8(
@@ -939,7 +939,7 @@ class CustomTaskSet(TaskSet):
             "update_time, is_finish, `status` FROM parking_record WHERE plate_number = '%s' AND synid = '%s';" \
             % (str(random.choice(CustomTaskSet.sql_plateNumber)), str(random.choice(CustomTaskSet.sql_synid))))
 
-    @task(1)
+    # @task(1)
     def execute_query9(self):
         """普通索引查询"""
         self.client.execute_query9(
@@ -948,7 +948,7 @@ class CustomTaskSet(TaskSet):
             "SUM(online_fee) AS total_online_fee FROM parking_record WHERE plate_number = '%s' AND `status` = 1;" \
             % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(1)
+    # @task(1)
     def execute_query10(self):
         """普通索引查询"""
         self.client.execute_query10(
@@ -958,7 +958,7 @@ class CustomTaskSet(TaskSet):
             "entrance_car_plate_color = 1 AND entrance_time > '2019-01-01';" \
             % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(1)
+    # @task(1)
     def execute_query11(self):
         """唯一索引联表查询"""
         self.client.execute_query11(
@@ -968,7 +968,7 @@ class CustomTaskSet(TaskSet):
             "WHERE updatetime > '2021-01-01' AND receivablefee = 0.00 AND actualfee = 0.00 AND c.`synid` = '%s';" \
             % str(random.choice(CustomTaskSet.sql_synid)))
 
-    @task(10)
+    # @task(10)
     def execute_query12(self):
         """普通索引内联查询"""
         self.client.execute_query12(
@@ -979,7 +979,7 @@ class CustomTaskSet(TaskSet):
             "entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 AND c.`platenumber` " \
             "= '%s';" % str(random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(50)
+    # @task(50)
     def execute_query13(self):
         """唯一索引联表查询"""
         self.client.execute_query13(
@@ -990,7 +990,7 @@ class CustomTaskSet(TaskSet):
             "= p.synid WHERE entrancetime > '2019-01-01' AND receivablefee != 0.00 AND actualfee = 0.01 " \
             "AND c.`synid` = '%s';" % str(random.choice(CustomTaskSet.sql_synid)))
 
-    @task(1)
+    # @task(1)
     def execute_query14(self):
         """分页普通索引联表查询"""
         self.client.execute_query14(
@@ -1000,7 +1000,7 @@ class CustomTaskSet(TaskSet):
             "AND receivablefee != 0.00 AND actualfee = 0.01 AND c.platenumber = '%s';" % str(
                 random.choice(CustomTaskSet.sql_plateNumber)))
 
-    @task(1)
+    # # @task(1)
     def execute_query15(self):
         """查询parking_id普通索引联表查询"""
         self.client.execute_query15(
@@ -1009,27 +1009,27 @@ class CustomTaskSet(TaskSet):
             "WHERE c.`parkingid` = %s AND p.`area_id` AND p.`state` = 0 AND p.`status` < 3 AND p.entrance_time = '2022-08-04' GROUP BY c.`platenumber`;" \
             % (random.choice(CustomTaskSet.sql_parkingid)))
 
-    @task(1)
+    # @task(1)
     def execute_query16(self):
         """select 查询in parking_id / plate_number order by entrance_time"""
         self.client.execute_query16(
             self.conn_string,
             "SELECT parking_id, plate_number FROM parking_record ORDER BY entrance_time LIMIT 0, 10;")
 
-    @task(1)
+    @task(50)
     def execute_insert1(self):
         """carout_payment表单条插入"""
         self.client.execute_insert1(
             self.conn_string,
-            "INSERT INTO carout_payment(parkingid, platenumber, exitparkingboxid, entrancetime, exittime, ontime," \
-            " updatetime, recordsynid, synid, receivablefee, actualfee, onlinefee, couponfee, centerfee, cardfee," \
+            "INSERT INTO carout_payment(id,parkingid, platenumber, exitparkingboxid, entrancetime, exittime, ontime, " \
+            "updatetime, recordsynid, synid, receivablefee, actualfee, onlinefee, couponfee, centerfee, cardfee, " \
             "buscardfee, adminid, state, upload,upload_insert,upload_update, integralsfee,losemoney,entranceroad," \
             "entranceroadname,exitroad,exitroadname,realname,isfixed,remarks,cartypeid,cartypename,exitparkingboxname," \
-            "couponid,usetype,businessid,usecouponparkingboxid,cpmfee,overcharged) VALUES(1004042,'藏QVVVV1'," \
-            "10003994,NOW(),NOW(),NOW(),NOW(),UUID(),UUID(),0.00,0.00,0.00,0.00,0.00,0.00,0.00,6238,0,2,NOW(),NOW()," \
-            "0.00,0.00,7362,'入口1',7365,'出口1','搜索',77,'这是插入数据remarks',5251,'2cpd','岗亭1',0,0,0,0,0.00,0.00);")
+            "cpmfee,overcharged) VALUES(NOW(),1004042,'藏QVVVV1',10003994,NOW(),NOW(),NOW(),NOW(),UUID(),UUID()," \
+            "0.00,0.00,0.00,0.00,0.00,0.00,0.00,6238,0,2,NOW(),NOW(),0.00,0.00,7362,'入口1',7365,'出口1','搜索',77," \
+            "'这是remarks',5251,'2cpd','岗亭1',0.00,0.00);")
 
-    @task(1)
+    # # @task(1)
     def execute_insert2(self):
         """parking_record表单条插入"""
         self.client.execute_insert2(
@@ -1039,6 +1039,7 @@ class CustomTaskSet(TaskSet):
             "entrance_road,synid,plate_number,upload_insert,upload_update,remarks,online_fee,`status`) VALUES(77,NOW()," \
             "10003994,NOW(),10003994,0.02,0.00,6238,NOW(),NOW(),1004042,3430,UUID(),77,4937,7365,7362,UUID(),'藏QVVVV1'," \
             "NOW(),NOW(),'这是插入parking_record的数据',0.00,1);")
+
 
     def on_stop(self):
         print("------ Test over ------")
