@@ -1095,7 +1095,7 @@ class CustomTaskSet(TaskSet):
                 "entrance_car_plate_color = 1 AND entrance_time > '2019-01-01';"
                 , (str(random.choice(CustomTaskSet.sql_plateNumber)), ), False)
             
-    # @task(1)
+    @task(1)
     def execute_query11(self):
         """唯一索引联表查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1113,7 +1113,7 @@ class CustomTaskSet(TaskSet):
                 , (str(random.choice(CustomTaskSet.sql_synid)), ), False)
 
 
-    # @task(10)
+    @task(10)
     def execute_query12(self):
         """普通索引内联查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1133,7 +1133,7 @@ class CustomTaskSet(TaskSet):
                 "= ?;"
                 , (str(random.choice(CustomTaskSet.sql_plateNumber)), ), False)
 
-    # @task(50)
+    @task(50)
     def execute_query13(self):
         """唯一索引联表查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1153,7 +1153,7 @@ class CustomTaskSet(TaskSet):
                 "AND c.`synid` = ?;"
                 , (str(random.choice(CustomTaskSet.sql_synid)), ), False)
 
-    # @task(1)
+    @task(1)
     def execute_query14(self):
         """分页普通索引联表查询"""
         if config.USE_PREPARE_STMT == False:
