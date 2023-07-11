@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from gevent import monkey
 monkey.patch_all()
+
 import random
 import time
 
@@ -11,6 +12,9 @@ from sqlalchemy import create_engine, exc, text
 
 import mysql.connector
 from demo.locust_test import config
+
+
+
 
 
 def singleton(cls):
@@ -57,11 +61,11 @@ class PrepareStmtClient:
         self.cnx.autocommit = True
         self.curprep = self.cnx.cursor(prepared=config.USE_PREPARE_STMT)
 
-
+    """
     def __del__(self):
         self.curprep.close()
         self.cnx.close()
-
+    """
 
     def __getattr__(self, name):
         def wrapper(*args, **kwargs):
@@ -70,17 +74,25 @@ class PrepareStmtClient:
                 self.curprep.execute(*args, **kwargs)
                 rowset = self.curprep.fetchall()
                 events.request.fire(
-                    request_type="MonographDB",
+                    request_type="MonographDB-PreparedStmt-Client",
                     name=name,
+                    start_time=start_time,
+                    response= None,
                     response_time=int((time.time() - start_time) * 1000),
-                    response_length=len(rowset))
+                    response_length=len(rowset),
+                    context= {},
+                    exception= None
+                )
                 
             except (Exception, exc.OperationalError) as e:
                 events.request.fire(
-                    request_type="MonographDB",
+                    request_type="MonographDB-PreparedStmt-Client",
                     name=name,
+                    start_time=start_time,
+                    response=None,
                     response_time=int((time.time() - start_time) * 1000),
                     response_length=0,
+                    context={},
                     exception=e)
 
         return wrapper
@@ -104,19 +116,27 @@ class MySqlClient:
             try:
                 
                 res = execute_query_from_pool(*args, **kwargs)
-                
+
                 events.request.fire(
-                    request_type="MonographDB",
+                    request_type="MonographDB-Connection-Pool-Client",
                     name=name,
+                    start_time=start_time,
+                    response= None,
                     response_time=int((time.time() - start_time) * 1000),
-                    response_length=res.rowcount)
+                    response_length=res.rowcount,
+                    context= {},
+                    exception= None
+                )
                 
             except (Exception, exc.OperationalError) as e:
                 events.request.fire(
-                    request_type="MonographDB",
+                    request_type="MonographDB-Connection-Pool-Client",
                     name=name,
+                    start_time=start_time,
+                    response=None,
                     response_time=int((time.time() - start_time) * 1000),
                     response_length=0,
+                    context={},
                     exception=e)
 
         return wrapper
@@ -1095,7 +1115,7 @@ class CustomTaskSet(TaskSet):
                 "entrance_car_plate_color = 1 AND entrance_time > '2019-01-01';"
                 , (str(random.choice(CustomTaskSet.sql_plateNumber)), ), False)
             
-    @task(1)
+    # @task(1)
     def execute_query11(self):
         """唯一索引联表查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1113,7 +1133,7 @@ class CustomTaskSet(TaskSet):
                 , (str(random.choice(CustomTaskSet.sql_synid)), ), False)
 
 
-    @task(10)
+    # @task(10)
     def execute_query12(self):
         """普通索引内联查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1133,7 +1153,7 @@ class CustomTaskSet(TaskSet):
                 "= ?;"
                 , (str(random.choice(CustomTaskSet.sql_plateNumber)), ), False)
 
-    @task(50)
+    # @task(50)
     def execute_query13(self):
         """唯一索引联表查询"""
         if config.USE_PREPARE_STMT == False:
@@ -1153,7 +1173,7 @@ class CustomTaskSet(TaskSet):
                 "AND c.`synid` = ?;"
                 , (str(random.choice(CustomTaskSet.sql_synid)), ), False)
 
-    @task(1)
+    # @task(1)
     def execute_query14(self):
         """分页普通索引联表查询"""
         if config.USE_PREPARE_STMT == False:
