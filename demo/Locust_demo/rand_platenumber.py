@@ -24,4 +24,18 @@ def rand_plateNumbers():
             break
     return plateNumber
 
+def getParkingPlaceNum(self):
+    """
+    端云车场余位查询接口
+    :return:
+    """
+    parkingId = '1019968'
+    with self.client.get("/parkingplace/v1/getParkingPlaceNum?parkingId=" + parkingId, name='查询余位') as res:
+        if res.status_code != 200:
+            ic(res.text)
+        else:
+            pass
+
+    return res
+
 ic(rand_plateNumbers())
